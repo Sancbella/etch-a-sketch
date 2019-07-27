@@ -1,0 +1,21 @@
+.grid-container {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.grid-pc {
+    width: 36px;
+    height: 36px;
+    outline: 1px solid;
+}
+.hover{
+    background: blue;
+}
+.clear-div {
+    display: flex;
+  justify-content: center;  
+  margin: 30px;
+}
