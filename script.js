@@ -1,36 +1,48 @@
 
 var clearBtn = document.querySelector("button")
+var askSize = ''
+var gridPcs = ''
+
+const getSize = () => {
+    askSize = prompt("How wide do you want your etch-a-sketch?")
+}
+
 var generateGrid = () => {
     let container = document.querySelector("body > div.grid-container");
-    for (let i = 0; i < 256; i++) {
+    getSize();
+    if (askSize > 100) {
+        askSize = 100
+    }
+    var cellDimension = 600/askSize
+    console.log(cellDimension);
+    
+    for (let i = 0; i < (askSize*askSize); i++) {
         newDiv = document.createElement('div');
         newDiv.className += "grid-pc"
+        newDiv.style.height= `${cellDimension}px`
+        newDiv.style.width = `${cellDimension}px`
         container.appendChild(newDiv);
     }
     
     console.log('Generation Complete');
-    
-}
-
-generateGrid();
-//listeners
-//addEventListener("mouseover",(hoverAction(e)))
-const gridPcs = document.querySelectorAll("div>div");
-
-gridPcs.forEach((gridPc) => {
-    gridPc.addEventListener('mouseover',(e) => {
-        e.target.classList.toggle('hover'); 
+    var gridPcs = document.querySelectorAll("div>div");
+    gridPcs.forEach((gridPc) => {
+        gridPc.addEventListener('mouseover',(e) => {
+            e.target.classList.toggle('hover'); 
+        });
+        console.log('listener added');
     });
-    console.log('listener added');
-});
+}
+var removeGrid = () => {
+    var gridPcs = document.querySelectorAll("div>div");
+    gridPcs.forEach((gridPc) => {
+        gridPc.remove();
+    });
+    generateGrid();
+}
+generateGrid();
 
+//listens to button
 clearBtn.addEventListener('click', () => {
-    console.log('cleared');
-    var selectedPcs = document.querySelectorAll('div')
-    selectedPcs.forEach((selectedPc) => {
-        selectedPc.classList.remove('hover');
-     
-        
-});
-});
-
+    removeGrid();    
+})
